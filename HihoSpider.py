@@ -41,15 +41,17 @@ def GetAllLink(urlofrankpage):
         lis2.append(r"http://hihocoder.com"+s[9:len(s)-2])
     return lis2
 def write_to_file(codelist):
-    outputdir=r"C:\Documents and Settings\aa\test\source\spider_"
+    outputdir=r"C:\Spider\hiho149\spider_"
     cnt=0
-    shutil.rmtree(os.path.dirname(outputdir))
+    if os.path.exists(os.path.dirname(outputdir)):
+        shutil.rmtree(os.path.dirname(outputdir))
+    os.makedirs(os.path.dirname(outputdir))
     for ll in codelist:
 ##        if cnt%10==0:
 ##            print("\nWriting:No."+str(cnt))
         if ll[0]!='G++' and ll[0]!='GCC':
             continue
-        fpath=outputdir+str(cnt)+ll[0]+ll[1]+ll[3]+r"\boating.cpp"
+        fpath=outputdir+str(cnt)+ll[0]+ll[1]+ll[3]+r"\firewall.cpp"
         if not os.path.exists(os.path.dirname(fpath)):
             os.makedirs(os.path.dirname(fpath))
         with open(fpath,"w") as f:
@@ -57,9 +59,9 @@ def write_to_file(codelist):
         cnt=cnt+1
     
 
-codeurllist=GetAllLink("http://hihocoder.com/contest/hiho38/rank")
+codeurllist=GetAllLink("http://hihocoder.com/contest/hiho149/rank")
 
-codeurllist=codeurllist+GetAllLink("http://hihocoder.com/contest/hiho38/rank?page=2")
+##codeurllist=codeurllist+GetAllLink("http://hihocoder.com/contest/hiho38/rank?page=2")
 ##print(codelist)
 ##tt=GetText(GetURL("http://hihocoder.com/contest/hiho38/solution/261835"))
 ##print (tt[2])
@@ -74,3 +76,4 @@ for url in codeurllist:
 print("\nCode caught:"+str(len(codelist)))
 write_to_file(codelist)
 print("\nFile Written")
+##print(GetURL(r"http://hihocoder.com/contest/hiho38/solution/263222"))
